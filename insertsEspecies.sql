@@ -1,0 +1,10 @@
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (1, 'Perro');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (2, 'Gato');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (3, 'Ave');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (4, 'Conejo');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (5, 'Hamster');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (6, 'Tortuga');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (7, 'Iguana');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (8, 'Huron');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (9, 'Cobayo');
+insert into veterinariaTX.dbo.mascota_especie(ID_MASCOTA_ESPECIE, DESCRIPCION_ESPECIE) values (10, 'Pez');
