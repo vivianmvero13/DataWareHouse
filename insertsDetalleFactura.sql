@@ -19,3 +19,11 @@ WITH (
 );
 
 --- DETALLE FACTURA CIRUGIAS ---
+BULK INSERT VETERINARIATX.DBO.DETALLE_FACTURA
+FROM 'C:\Users\vivia\Universidad\DataWH\Proyecto\detalleFacturaCirugias.csv'
+WITH (
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '0x0a',
+    FIRSTROW = 1,
+    TABLOCK
+);
