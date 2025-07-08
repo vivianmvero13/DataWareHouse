@@ -124,7 +124,8 @@ SELECT * FROM  veterinariaTX.dbo.clientes;
 
 SELECT * FROM  veterinariaTX.dbo.mascota_especie;
 SELECT * FROM  veterinariaTX.dbo.mascota_raza;
-SELECT * FROM  veterinariaTX.dbo.mascotas;
+SELECT * FROM  veterinariaTX.dbo.mascotas 
+WHERE ID_MASCOTA = 159851;
 
 SELECT * FROM VETERINARIATX.DBO.CONSULTA_MOTIVO;
 SELECT * FROM  VETERINARIATX.DBO.CONSULTAS;
