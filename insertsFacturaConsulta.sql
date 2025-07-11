@@ -18,7 +18,7 @@ WITH (
     TABLOCK
 );
 
---- FACTURA CIRUGIAS MEDICAMENTOS ---
+--- FACTURA CIRUGIAS ---
 BULK INSERT VETERINARIATX.DBO.FACTURA
 FROM 'C:\Users\vivia\Universidad\DataWH\Proyecto\facturaCirugias.csv'
 WITH (
