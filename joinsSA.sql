@@ -17,26 +17,30 @@ SELECT
   cnt.NOMBRE_CANTON AS Canton,
   prv.NOMBRE_PROVINCIA AS Provincia
 
-FROM veterinariaSA.ext.mascotas m
-JOIN veterinariaSA.ext.mascota_raza rz
+INTO veterinariaSA.tra.Mascotas_D 
+FROM veterinariaSA.ext.mascotas m 
+LEFT JOIN veterinariaSA.ext.mascota_raza rz
   ON m.ID_MASCOTA_RAZA = rz.ID_MASCOTA_RAZA
-JOIN veterinariaSA.ext.mascota_especie esp
+LEFT JOIN veterinariaSA.ext.mascota_especie esp
   ON rz.ID_MASCOTA_ESPECIE = esp.ID_MASCOTA_ESPECIE
-JOIN veterinariaSA.ext.clientes cl
+LEFT JOIN veterinariaSA.ext.clientes cl
   ON m.ID_CLIENTE = cl.ID_CLIENTES
-JOIN veterinariaSA.ext.distritos dst
+LEFT JOIN veterinariaSA.ext.distritos dst
   ON cl.DISTRITO_ID = dst.ID_DIRECCION_DISTRITO
-JOIN veterinariaSA.ext.canton cnt
+LEFT JOIN veterinariaSA.ext.canton cnt
   ON dst.CANTON_ID = cnt.ID_DIRECCION_CANTON
-JOIN veterinariaSA.ext.provincia prv
-  ON cnt.PROVINCIA_ID = prv.ID_DIRECCION_PROVINCIA;
+LEFT JOIN veterinariaSA.ext.provincia prv
+  ON cnt.PROVINCIA_ID = prv.ID_DIRECCION_PROVINCIA
 
 -- Obtener fechaNacimiento_D --
+
 SELECT 
   m.MASCOTA_FECHA_NACIMIENTO AS Fecha_Nacimiento,
   DATEDIFF(YEAR, m.MASCOTA_FECHA_NACIMIENTO, GETDATE()) AS Annios,
   (DATEDIFF(MONTH, m.MASCOTA_FECHA_NACIMIENTO, GETDATE()) % 12) AS Meses
-FROM veterinariaSA.ext.mascotas m;
+
+INTO veterinariaSA.tra.FechaNacimiento_D 
+FROM veterinariaSA.ext.mascotas m
 
 -- Obtener fechaServicio_D --
 SELECT 
@@ -44,25 +48,25 @@ SELECT
   DAY(fact.FECHA_FACTURA) AS Dia,
   DATENAME(MONTH, fact.FECHA_FACTURA) AS Mes,
   YEAR(fact.FECHA_FACTURA) AS Anio
+
+INTO veterinariaSA.tra.FechaServicio_D
 FROM veterinariaSA.ext.factura fact;
 
 -- Obtener Cirugia_D --
---- *********PEDIR AYUDA AL PROFE PARA CALCULAR EL MONTO FINAL********* ---
 SELECT 
-	c.ID_CIRUGIA,
-	tc.NOMBRE_CIRUGIA AS tipo,
+	c.ID_CIRUGIA AS idCirugia,
+	tc.NOMBRE_CIRUGIA AS tipoCirugia,
 	CASE 
 		WHEN c.DURACION < 2 THEN 'Corta'
 		WHEN c.DURACION BETWEEN 2 AND 4 THEN 'Media'
 		Else  'Larga'
-	END AS categoriaDuracion
-
+	END AS categoriaDuracion,
+	c.DURACION AS tiempoDuracion,
+	c.MONTO AS monto
+INTO veterinariaSA.tra.Cirugia_D
 FROM veterinariaSA.ext.cirugias c
 JOIN veterinariaSA.ext.tipo_cirugia tc
 	ON c.ID_TIPO_CIRUGIA = tc.ID_TIPO_CIRUGIA
-
-LEFT JOIN veterinariaSA.ext.cirugias_medicamentos cm
-	ON c.ID_CIRUGIA = cm.ID_CIRUGIA;
 
 --- Obtener Consulta_D ---
 SELECT 
@@ -70,17 +74,19 @@ SELECT
   f.MONTO_TOTAL AS Monto,
   cm.DESCRIPCION_MOTIVO AS Motivo_Consulta
 
+INTO veterinariaSA.tra.Consulta_D
 FROM veterinariaSA.ext.consultas c
-JOIN veterinariaSA.ext.consulta_motivo cm
+LEFT JOIN veterinariaSA.ext.consulta_motivo cm
   ON c.ID_MOTIVO = cm.ID_CONSULTA_MOTIVO
 
-JOIN veterinariaSA.ext.detalle_factura df
+LEFT JOIN veterinariaSA.ext.detalle_factura df
   ON c.ID_CONSULTA = df.ID_CONSULTA
 
-JOIN veterinariaSA.ext.factura f
-  ON df.ID_FACTURA = f.ID_FACTURA;
+LEFT JOIN veterinariaSA.ext.factura f
+  ON df.ID_FACTURA = f.ID_FACTURA
 
 --- Obtener Producto_D ---
+--HAY QUE CORREGIR CON RECOMENDACIONES DEL PROFE--
 SELECT 
   p.ID_PRODUCTO AS idProducto,
   p.PRODUCTO_NOMBRE AS Nombre,

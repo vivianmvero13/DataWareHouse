@@ -49,10 +49,6 @@ FROM veterinariaTX.dbo.marca_producto;
 SELECT * INTO veterinariaSA.ext.productos
 FROM veterinariaTX.dbo.productos;
 
--- Relación cirugía-productos
-SELECT * INTO veterinariaSA.ext.cirugias_medicamentos
-FROM veterinariaTX.dbo.cirugias_medicamentos;
-
 -- Facturación
 SELECT * INTO veterinariaSA.ext.factura
 FROM veterinariaTX.dbo.factura;
